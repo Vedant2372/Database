@@ -1,22 +1,15 @@
+### utils.py
 import os
 import datetime
 
 def format_results(paths):
-    """
-    Format and display file metadata results.
-    
-    Args:
-        paths (list): List of file paths from search results
-    Returns:
-        str: Formatted display string
-    """
     if not paths:
         return "❌ No matching documents found."
 
     lines = ["\n📄 Top Matching Files:"]
     for i, path in enumerate(paths[:5], 1):
         if not os.path.exists(path):
-            continue  # Skip missing files
+            continue
 
         name = os.path.basename(path)
         filetype = os.path.splitext(path)[1][1:].upper() or "Unknown"
@@ -29,7 +22,7 @@ def format_results(paths):
         lines.append(
             f"\n🔹 File {i}:\n"
             f"   📄 Name     : {name}\n"
-            f"   📁 Path     : {path}\n"
+            f"   📝 Path     : {path}\n"
             f"   🕒 Modified : {modified_date}\n"
             f"   📄 Type     : {filetype}"
         )

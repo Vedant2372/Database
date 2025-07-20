@@ -1,3 +1,4 @@
+# main.py
 from query_sender import send_query_to_api
 from utils import format_results
 
@@ -13,7 +14,11 @@ def cli():
 
         results = send_query_to_api(query)
         print("[DEBUG] Raw results from API:", results)
-        print(format_results(results.get("results", [])))  # ✅ Safely pass just the list
+
+        if isinstance(results, dict):
+            print(format_results(results.get("results", [])))
+        else:
+            print("❌ No response from search API.")
 
 if __name__ == "__main__":
     cli()
